@@ -24,10 +24,15 @@ const weatherTranslation = {
   // Adicione mais traduções conforme necessário
 };
 
-
 async function checkWeather(city) {
   const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
-  var data = await response.json();
+
+  if (response.status == 404) {
+    document.querySelector(".error").style.display = "block";
+    document.querySelector(".weather").style.display = "none";
+  } else {
+    var data = await response.json();
+  }
 
   weatherTxt = data.weather[0].main;
   console.log(data);
@@ -40,10 +45,13 @@ async function checkWeather(city) {
   if (weatherMap.hasOwnProperty(weatherTxt)) {
     weatherIcon.src = weatherMap[weatherTxt];
     conditionApi.innerHTML = weatherTranslation[weatherTxt];
-
   } else {
     console.error(`Tipo de clima não encontrado: ${weatherTxt}`);
   }
+
+  document.querySelector(".weather").style.display = "block";
+  document.querySelector(".error").style.display = "none";
+
 }
 
 searchBtn.addEventListener("click", () => {

@@ -8,14 +8,20 @@
 }
 
 body {
-  background: #222;
+  max-width: 1366px;
+  margin: auto;
+  padding-top: 50px;
+  background: black;
+  height: 100vh;
+  width: 100vh;
+
 }
 
 .card {
   width: 90%;
   max-width: 470px;
-  background: linear-gradient(135deg, #00feba, #5b548a);
   color: #fff;
+  background: linear-gradient(135deg, #00feba, #5b548a);
   margin: 100px auto 0;
   border-radius: 20px;
   padding: 40px 35px;
@@ -29,9 +35,6 @@ body {
   justify-content: space-between;
 }
 
-
-
-
 .search input {
   border: 0;
   outline: 0;
@@ -43,9 +46,7 @@ body {
   flex: 1;
   margin-right: 16px;
   font-size: 18px;
-
 }
-
 
 .search button {
   display: flex;
@@ -62,6 +63,10 @@ body {
 
 .search button img {
   width: 20px;
+}
+
+.weather {
+  display: none;
 }
 
 .weather-icon {
@@ -101,8 +106,18 @@ body {
   object-fit: cover;
 }
 
-.col .humidity, .wind {
+.col .humidity,
+.wind {
   font-size: 28px;
 }
 
-
+.error {
+  display: none;
+  align-self: center;
+  border: 2px solid grey;
+  color: grey;
+  padding: 5px;
+  border-radius: 20px;
+  margin-top: 15px;
+  font-size: 18px;
+}
