@@ -6,12 +6,30 @@ const apiUrl =
 const searchBox = document.querySelector(".search input");
 const searchBtn = document.querySelector(".search button");
 const weatherIcon = document.querySelector(".weather-icon");
+const conditionApi = document.querySelector(".condition");
+const weatherMap = {
+  Clouds: "./assets/img/clouds.png",
+  Clear: "./assets/img/clear.png",
+  Rain: "./assets/img/rain.png",
+  Drizzle: "./assets/img/drizzle.png",
+  Mist: "./assets/img/mist.png",
+};
+
+const weatherTranslation = {
+  Clouds: "Nublado",
+  Clear: "Limpo",
+  Rain: "Chuva",
+  Drizzle: "Garoa",
+  Mist: "Neblina",
+  // Adicione mais traduções conforme necessário
+};
 
 
 async function checkWeather(city) {
   const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
   var data = await response.json();
 
+  weatherTxt = data.weather[0].main;
   console.log(data);
 
   document.querySelector(".city").innerHTML = data.name;
@@ -19,25 +37,13 @@ async function checkWeather(city) {
   document.querySelector(".humidity").innerHTML = data.main.humidity + " %";
   document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
 
-  if (data.weather[0].main == "Clouds") {
-    weatherIcon.src = "./assets/img/clouds.png"
-  }
-  else if (data.weather[0].main == "Clear") {
-    weatherIcon.src = "./assets/img/clear.png"
-  }
-  else if (data.weather[0].main == "Rain") {
-    weatherIcon.src = "./assets/img/rain.png"
-  }
-  else if (data.weather[0].main == "Drizzle") {
-    weatherIcon.src = "./assets/img/drizzle.png"
-  }
-  else if (data.weather[0].main == "Mist") {
-    weatherIcon.src = "./assets/img/mist.png"
-  }
+  if (weatherMap.hasOwnProperty(weatherTxt)) {
+    weatherIcon.src = weatherMap[weatherTxt];
+    conditionApi.innerHTML = weatherTranslation[weatherTxt];
 
-
-
-
+  } else {
+    console.error(`Tipo de clima não encontrado: ${weatherTxt}`);
+  }
 }
 
 searchBtn.addEventListener("click", () => {
