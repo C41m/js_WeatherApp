@@ -8,11 +8,21 @@
   </head>
   <body>
     <div class="card">
-      <div class="search">
-        <input type="text" placeholder="Nome da cidade" spellcheck="false" />
-        <button>
-          <img src="./assets/img/search.png" alt="" />
-        </button>
+      <div class="searchContainer">
+        <div class="search">
+          <input
+            type="text"
+            id="cityInput"
+            placeholder="Digite o nome da cidade"
+            oninput="getSuggestions()"
+          />
+          <button>
+            <img src="./assets/img/search.png" alt="" />
+          </button>
+        </div>
+        <div class="suggestionBox">
+          <ul id="suggestions" onclick="fillInput(event)"></ul>
+        </div>
       </div>
       <div class="error">
         <p>Localidade não encontrada</p>

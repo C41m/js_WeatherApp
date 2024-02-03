@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Autocompletar Cidades</title>
+  </head>
+  <body>
+    <h1>Autocompletar Cidades</h1>
+    <label for="cityInput">Digite o nome da cidade:</label>
+    <input
+      type="text"
+      id="cityInput"
+      placeholder="Digite o nome da cidade"
+      oninput="getSuggestions()"
+    />
+    <ul id="suggestions" onclick="fillInput(event)"></ul>
+
+    <script>
+      async function getSuggestions() {
+        const input = document.getElementById("cityInput");
+        const suggestionsList = document.getElementById("suggestions");
+
+        // Limpar lista de sugestões
+        suggestionsList.innerHTML = "";
+
+        // Obter sugestões da API Geonames
+        if (input.value.trim() !== "") {
+          const apiUrl = `http://api.geonames.org/searchJSON?q=${input.value}&maxRows=5&username=demo`;
+          const response = await fetch(apiUrl);
+          const data = await response.json();
+
+          // Adicionar sugestões à lista
+          data.geonames.forEach((city) => {
+            const listItem = document.createElement("li");
+            listItem.textContent = `${city.name}, ${city.adminName1}, ${city.countryName}`;
+            suggestionsList.appendChild(listItem);
+          });
+        }
+      }
+
+      function fillInput(event) {
+        const input = document.getElementById("cityInput");
+
+        // Preencher o campo de entrada com o texto da sugestão clicada
+        if (event.target.tagName === "LI") {
+          input.value = event.target.textContent;
+        }
+      }
+    </script>
+  </body>
+</html>

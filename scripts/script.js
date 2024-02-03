@@ -1,7 +1,7 @@
 const apiKey = "6ff2f0352eab561384d8f3df45cf4efb";
 
 const apiUrl =
-  "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+  "https://api.openweathermap.org/data/2.5/weather?units=metric&lang=pt_br&q=";
 
 const searchBox = document.querySelector(".search input");
 const searchBtn = document.querySelector(".search button");
@@ -14,7 +14,7 @@ const weatherMap = {
   Drizzle: "./assets/img/drizzle.png",
   Mist: "./assets/img/mist.png",
   Thunderstorm: "./assets/img/storm.png",
-  Snow: "./assets/img/snow.png"
+  Snow: "./assets/img/snow.png",
 };
 
 const weatherTranslation = {
@@ -34,6 +34,46 @@ function convertTimestampTime(timestamp) {
     minute: "2-digit",
   });
   return time;
+}
+
+async function getSuggestions() {
+  const input = document.querySelector("#cityInput");
+  const suggestionsContainer = document.querySelector(".suggestionBox");
+  const suggestionsList = document.getElementById("suggestions");
+
+  // Limpar lista de sugestões
+  suggestionsList.innerHTML = "";
+
+  // Obter sugestões da API Geonames
+  if (input.value.trim() !== "") {
+    const apiUrl = `http://api.geonames.org/searchJSON?q=${input.value}&maxRows=5&username=c41m`;
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+
+    // Verificar se a propriedade 'geonames' existe
+    if (data.geonames && Array.isArray(data.geonames)) {
+      // Adicionar sugestões à lista
+      data.geonames.forEach((city) => {
+        const listItem = document.createElement("li");
+        listItem.textContent = `${city.name}, ${city.adminName1}, ${city.countryName}`;
+        suggestionsList.appendChild(listItem);
+      });
+      // Exibir o contêiner de sugestões
+      suggestionsContainer.classList.add("block");
+    }
+  } else {
+    // Ocultar o contêiner de sugestões se o campo de entrada estiver vazio
+    suggestionsContainer.classList.remove("block");
+  }
+}
+
+function fillInput(event) {
+  const input = document.getElementById("cityInput");
+
+  // Preencher o campo de entrada com o texto da sugestão clicada
+  if (event.target.tagName === "LI") {
+    input.value = event.target.textContent;
+  }
 }
 
 async function checkWeather(city) {
@@ -78,4 +118,14 @@ async function checkWeather(city) {
 
 searchBtn.addEventListener("click", () => {
   checkWeather(searchBox.value);
+  const suggestionBox = document.querySelector(".suggestionBox");
+  suggestionBox.style.display = "none";
+});
+
+searchBox.addEventListener("keydown", (event) => {
+  if (event.keyCode === 13) {
+    checkWeather(searchBox.value);
+    const suggestionBox = document.querySelector(".suggestionBox");
+    suggestionBox.style.display = "none";
+  }
 });

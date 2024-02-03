@@ -27,41 +27,72 @@ body {
   text-align: center;
 }
 
+.searchContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
 .search {
-  width: 100%;
+  position: relative;
+  height: 60px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: whitesmoke;
+  border: none;
+  border-radius: 20px;
+  z-index: 1;
 }
 
 .search input {
   border: none;
+  display: flex;
+  width: 100%;
   outline: none;
-  background: #ebfffc;
+  background-color: transparent;
   color: #555;
-  padding: 10px 25px;
-  height: 60px;
-  border-radius: 30px;
-  flex: 1;
-  margin-right: 16px;
+  padding-left: 25px;
   font-size: 18px;
 }
 
 .search button {
   display: flex;
   border: 0;
-  outline: 0;
-  background: #ebfffc;
-  border-radius: 50%;
-  min-width: 60px;
-  min-height: 60px;
-  align-items: center;
+  background: transparent;
+  padding-right: 20px;
+  padding-left: 10px;
   justify-content: center;
-  cursor: pointer;
 }
 
 .search button img {
   width: 20px;
+  cursor: pointer;
+}
+
+.suggestionBox {
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  background-color: whitesmoke;
+  border: none;
+  border-radius: 20px;
+  padding-top: 25px;
+  padding-bottom: 5px;
+  margin-top: -30px;
+  padding-left: 25px;
+  font-size: 18px;
+  color: grey;
+  text-align: left;
+  max-height: 150px;
+  overflow-y: auto;
+  z-index: 0;
+  display: flex;
+}
+
+.suggestionBox li {
+  padding: 3px 0px;
+  list-style-type: none;
 }
 
 .weather {
