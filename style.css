@@ -10,20 +10,17 @@
 body {
   max-width: 1366px;
   margin: auto;
-  padding-top: 50px;
+  padding-top: 30px;
   background: black;
   height: 100vh;
   width: 100vh;
-
 }
 
 .card {
-  width: 90%;
-  max-width: 470px;
+  max-width: 900px;
   color: #fff;
-  background-color: #8BC6EC;
-  background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
-  
+  background-color: #8bc6ec;
+  background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
   margin: 100px auto 0;
   border-radius: 20px;
   padding: 40px 35px;
@@ -71,7 +68,7 @@ body {
   /* display: none; */
 }
 
-.weather .condition{
+.weather .condition {
   font-size: 35px;
 }
 
@@ -112,7 +109,12 @@ body {
 }
 
 .col .humidity,
-.wind, .maxtemp, .mintemp {
+.wind,
+.maxtemp,
+.mintemp,
+.feels,
+.sunrise,
+.sunset {
   font-size: 28px;
 }
 

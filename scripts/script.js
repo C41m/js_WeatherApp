@@ -13,16 +13,28 @@ const weatherMap = {
   Rain: "./assets/img/rain.png",
   Drizzle: "./assets/img/drizzle.png",
   Mist: "./assets/img/mist.png",
+  Thunderstorm: "./assets/img/storm.png",
+  Snow: "./assets/img/snow.png"
 };
 
 const weatherTranslation = {
   Clouds: "Nublado",
-  Clear: "Limpo",
+  Clear: "Céu Limpo",
   Rain: "Chuva",
-  Drizzle: "Garoa",
+  Drizzle: "Chuvisco",
   Mist: "Neblina",
-  // Adicione mais traduções conforme necessário
+  Thunderstorm: "Tempestade",
+  Snow: "Neve",
 };
+
+function convertTimestampTime(timestamp) {
+  const date = new Date(timestamp * 1000);
+  const time = date.toLocaleTimeString("pt-BR", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  return time;
+}
 
 async function checkWeather(city) {
   const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
@@ -37,12 +49,21 @@ async function checkWeather(city) {
   weatherTxt = data.weather[0].main;
   console.log(data);
 
+  const sunriseTimestamp = data.sys.sunrise;
+  const sunsetTimestamp = data.sys.sunset;
+
+  const timeSunrise = convertTimestampTime(sunriseTimestamp);
+  const timeSunset = convertTimestampTime(sunsetTimestamp);
+
   document.querySelector(".city").innerHTML = data.name;
   document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "ºc";
   document.querySelector(".humidity").innerHTML = data.main.humidity + " %";
   document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
   document.querySelector(".mintemp").innerHTML = data.main.temp_min + "ºc";
   document.querySelector(".maxtemp").innerHTML = data.main.temp_max + "ºc";
+  document.querySelector(".feels").innerHTML = data.main.feels_like + "ºc";
+  document.querySelector(".sunrise").innerHTML = timeSunrise + "H";
+  document.querySelector(".sunset").innerHTML = timeSunset + "H";
 
   if (weatherMap.hasOwnProperty(weatherTxt)) {
     weatherIcon.src = weatherMap[weatherTxt];
