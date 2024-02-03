@@ -41,6 +41,8 @@ async function checkWeather(city) {
   document.querySelector(".temp").innerHTML = Math.round(data.main.temp) + "ºc";
   document.querySelector(".humidity").innerHTML = data.main.humidity + " %";
   document.querySelector(".wind").innerHTML = data.wind.speed + " km/h";
+  document.querySelector(".mintemp").innerHTML = data.main.temp_min + "ºc";
+  document.querySelector(".maxtemp").innerHTML = data.main.temp_max + "ºc";
 
   if (weatherMap.hasOwnProperty(weatherTxt)) {
     weatherIcon.src = weatherMap[weatherTxt];
@@ -51,7 +53,6 @@ async function checkWeather(city) {
 
   document.querySelector(".weather").style.display = "block";
   document.querySelector(".error").style.display = "none";
-
 }
 
 searchBtn.addEventListener("click", () => {

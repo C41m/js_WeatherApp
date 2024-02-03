@@ -21,7 +21,9 @@ body {
   width: 90%;
   max-width: 470px;
   color: #fff;
-  background: linear-gradient(135deg, #00feba, #5b548a);
+  background-color: #8BC6EC;
+  background-image: linear-gradient(135deg, #8BC6EC 0%, #9599E2 100%);
+  
   margin: 100px auto 0;
   border-radius: 20px;
   padding: 40px 35px;
@@ -36,8 +38,8 @@ body {
 }
 
 .search input {
-  border: 0;
-  outline: 0;
+  border: none;
+  outline: none;
   background: #ebfffc;
   color: #555;
   padding: 10px 25px;
@@ -66,12 +68,15 @@ body {
 }
 
 .weather {
-  display: none;
+  /* display: none; */
+}
+
+.weather .condition{
+  font-size: 35px;
 }
 
 .weather-icon {
   width: 170px;
-  margin-top: 30px;
 }
 
 .weather h1 {
@@ -87,7 +92,7 @@ body {
 
 .details {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   gap: 50px;
   padding: 30px;
 }
@@ -107,7 +112,7 @@ body {
 }
 
 .col .humidity,
-.wind {
+.wind, .maxtemp, .mintemp {
   font-size: 28px;
 }
 
