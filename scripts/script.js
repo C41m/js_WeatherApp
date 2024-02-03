@@ -38,7 +38,7 @@ function convertTimestampTime(timestamp) {
 
 async function getSuggestions() {
   const input = document.querySelector("#cityInput");
-  const suggestionsContainer = document.querySelector(".suggestionBox");
+  const suggestionBox = document.querySelector(".suggestionBox");
   const suggestionsList = document.getElementById("suggestions");
 
   // Limpar lista de sugestões
@@ -58,19 +58,18 @@ async function getSuggestions() {
         listItem.textContent = `${city.name}, ${city.adminName1}, ${city.countryName}`;
         suggestionsList.appendChild(listItem);
       });
+
       // Exibir o contêiner de sugestões
-      suggestionsContainer.classList.add("block");
+      suggestionBox.style.display = "block";
     }
   } else {
     // Ocultar o contêiner de sugestões se o campo de entrada estiver vazio
-    suggestionsContainer.classList.remove("block");
+    suggestionBox.style.display = "none";
   }
 }
 
 function fillInput(event) {
   const input = document.getElementById("cityInput");
-
-  // Preencher o campo de entrada com o texto da sugestão clicada
   if (event.target.tagName === "LI") {
     input.value = event.target.textContent;
   }

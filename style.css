@@ -31,6 +31,7 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
+  margin-bottom: 15px;
 }
 
 .search {
@@ -93,6 +94,7 @@ body {
 .suggestionBox li {
   padding: 3px 0px;
   list-style-type: none;
+  cursor: pointer;;
 }
 
 .weather {
@@ -153,7 +155,7 @@ body {
   display: none;
   align-self: center;
   border: 2px solid grey;
-  color: grey;
+  color: whitesmoke;
   padding: 5px;
   border-radius: 20px;
   margin-top: 15px;
