@@ -97,7 +97,7 @@ body {
 
 .weather {
   opacity: 1;
-  height: 1px;
+  height: 5000px;
   transition: opacity 1s ease-in-out, height 0.3s ease-in-out;
   overflow: hidden;
   /* display: none; */
@@ -192,7 +192,7 @@ body {
     display: block;
     overflow: visible;
   }
-  
+
   .weather img {
     margin: 5px 0px;
     width: 30%;
@@ -219,7 +219,7 @@ body {
     flex-direction: row-reverse;
     align-self: center;
     justify-content: center;
-    gap: 15px;
+    gap: 30px;
     margin: 0 15px;
   }
   .details {
@@ -237,8 +237,17 @@ body {
     align-items: center;
   }
 
-  .col img {
-    margin: 0;
+  .col .colimage {
+    width: 35px;
+    height: 35px;
+    transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
+
+  }
+  
+  .col .colimage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .coltext {
