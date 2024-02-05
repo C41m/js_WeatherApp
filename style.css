@@ -31,7 +31,6 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  margin-bottom: 15px;
 }
 
 .search {
@@ -94,11 +93,27 @@ body {
 .suggestionBox li {
   padding: 3px 0px;
   list-style-type: none;
-  cursor: pointer;;
+  cursor: pointer;
 }
 
 .weather {
-  /* display: none; */
+  opacity: 0;
+  height: 1px;
+  transition: opacity 1s ease-in-out, height 0.3s ease-in-out;
+  overflow: hidden;
+
+}
+
+.weather.active {
+  opacity: 1;
+  height: 580px; /* Um valor ainda maior para cobrir a maioria dos casos */
+  display: block;
+  overflow: visible;
+
+}
+
+.weather img {
+  margin: 5px 0px;
 }
 
 .weather .condition {
@@ -154,7 +169,7 @@ body {
 .error {
   display: none;
   align-self: center;
-  border: 2px solid grey;
+  border: 2px solid whitesmoke;
   color: whitesmoke;
   padding: 5px;
   border-radius: 20px;

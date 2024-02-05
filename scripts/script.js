@@ -37,33 +37,30 @@ function convertTimestampTime(timestamp) {
 }
 
 async function getSuggestions() {
+  
   const input = document.querySelector("#cityInput");
   const suggestionBox = document.querySelector(".suggestionBox");
   const suggestionsList = document.getElementById("suggestions");
 
-  // Limpar lista de sugestões
   suggestionsList.innerHTML = "";
 
-  // Obter sugestões da API Geonames
   if (input.value.trim() !== "") {
     const apiUrl = `http://api.geonames.org/searchJSON?q=${input.value}&maxRows=5&username=c41m`;
     const response = await fetch(apiUrl);
     const data = await response.json();
 
-    // Verificar se a propriedade 'geonames' existe
     if (data.geonames && Array.isArray(data.geonames)) {
-      // Adicionar sugestões à lista
       data.geonames.forEach((city) => {
-        const listItem = document.createElement("li");
-        listItem.textContent = `${city.name}, ${city.adminName1}, ${city.countryName}`;
-        suggestionsList.appendChild(listItem);
+        if (city.fcodeName !== "continent") {
+          const listItem = document.createElement("li");
+          listItem.textContent = `${city.name}, ${city.adminName1}, ${city.countryName}`;
+          suggestionsList.appendChild(listItem);
+        }
       });
 
-      // Exibir o contêiner de sugestões
       suggestionBox.style.display = "block";
     }
   } else {
-    // Ocultar o contêiner de sugestões se o campo de entrada estiver vazio
     suggestionBox.style.display = "none";
   }
 }
@@ -111,8 +108,9 @@ async function checkWeather(city) {
     console.error(`Tipo de clima não encontrado: ${weatherTxt}`);
   }
 
-  document.querySelector(".weather").style.display = "block";
+  document.querySelector(".weather").classList.add("active");
   document.querySelector(".error").style.display = "none";
+
 }
 
 searchBtn.addEventListener("click", () => {
@@ -126,5 +124,6 @@ searchBox.addEventListener("keydown", (event) => {
     checkWeather(searchBox.value);
     const suggestionBox = document.querySelector(".suggestionBox");
     suggestionBox.style.display = "none";
+    suggestionBox.style.height = "1px";
   }
 });
