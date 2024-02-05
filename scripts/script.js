@@ -44,7 +44,7 @@ async function getSuggestions() {
   suggestionsList.innerHTML = "";
 
   if (input.value.trim() !== "") {
-    const apiUrl = `https://api.geonames.org/searchJSON?q=${input.value}&maxRows=5&username=c41m`;
+    const apiUrl = `http://api.geonames.org/searchJSON?q=${input.value}&maxRows=5&username=c41m`;
     const response = await fetch(apiUrl);
     const data = await response.json();
 
