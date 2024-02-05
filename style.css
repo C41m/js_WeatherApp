@@ -11,20 +11,22 @@ body {
   max-width: 1366px;
   margin: auto;
   padding-top: 30px;
-  background: black;
+  background-image: linear-gradient(135deg, #8bc6ec 0%, #8388db 100%);
   height: 100vh;
-  width: 100vh;
+  width: 100%;
+
 }
 
 .card {
-  max-width: 900px;
+  max-width: 1024px;
   color: #fff;
-  background-color: #8bc6ec;
-  background-image: linear-gradient(135deg, #8bc6ec 0%, #9599e2 100%);
   margin: 100px auto 0;
   border-radius: 20px;
   padding: 40px 35px;
   text-align: center;
+  border: 4px solid whitesmoke;
+
+  overflow: hidden;
 }
 
 .searchContainer {
@@ -97,11 +99,10 @@ body {
 }
 
 .weather {
-  opacity: 0;
-  height: 1px;
+  opacity: 1;
+  /* height: 1px; */
   transition: opacity 1s ease-in-out, height 0.3s ease-in-out;
   overflow: hidden;
-
 }
 
 .weather.active {
@@ -109,7 +110,6 @@ body {
   height: 580px; /* Um valor ainda maior para cobrir a maioria dos casos */
   display: block;
   overflow: visible;
-
 }
 
 .weather img {
@@ -117,7 +117,7 @@ body {
 }
 
 .weather .condition {
-  font-size: 35px;
+  font-size: 30px;
 }
 
 .weather-icon {
@@ -175,4 +175,75 @@ body {
   border-radius: 20px;
   margin-top: 15px;
   font-size: 18px;
+}
+
+@media screen and (max-width: 738px) {
+  body {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .card {
+    margin: 0px 20px;
+    padding: 10px;
+  }
+
+  .weather img {
+    margin: 5px 0px;
+    width: 30%;
+  }
+  
+  .weather .temp {
+    font-size: 50px;
+  }
+
+  .weather .city {
+    font-size: 30px;
+  }
+  .search {
+    height: 80px;
+  }
+
+  .search input {
+    font-size: 25px;
+  }
+
+  .suggestionBox {
+    font-size: 20px;
+  }
+
+  .subcontainer {
+    display: flex;
+    flex-direction: row-reverse;
+    align-self: center;
+    justify-content: center;
+    gap: 15px;
+    margin: 0 15px;
+  }
+  .details {
+    flex-direction: column;
+    gap: 25px;
+    padding: 0px;
+    justify-content: start;
+  }
+
+  .details .col {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .col img {
+    margin: 0;
+  }
+
+
+  .coltext {
+    text-align: center;
+  }
+
+  .weather.active {
+  }
 }
