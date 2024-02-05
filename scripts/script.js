@@ -37,7 +37,6 @@ function convertTimestampTime(timestamp) {
 }
 
 async function getSuggestions() {
-  
   const input = document.querySelector("#cityInput");
   const suggestionBox = document.querySelector(".suggestionBox");
   const suggestionsList = document.getElementById("suggestions");
@@ -57,11 +56,8 @@ async function getSuggestions() {
           suggestionsList.appendChild(listItem);
         }
       });
-
       suggestionBox.style.display = "block";
     }
-  } else {
-    suggestionBox.style.display = "none";
   }
 }
 
@@ -112,7 +108,6 @@ async function checkWeather(city) {
 
   document.querySelector(".weather").classList.add("active");
   document.querySelector(".error").style.display = "none";
-
 }
 
 searchBtn.addEventListener("click", () => {
